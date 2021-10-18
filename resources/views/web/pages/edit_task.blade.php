@@ -70,7 +70,7 @@
                             @if (isset($task->project->id))
                             <option>Choose...</option> 
                             @else
-                            <option selected="">Choose...</option> 
+                            <option selected value="">Choose...</option> 
                             @endif
                             
                             @foreach ($projects as $project)
