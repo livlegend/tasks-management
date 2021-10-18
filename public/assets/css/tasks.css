@@ -1,7 +1,13 @@
 .draggable-div {
     cursor: move;
     background-color: #ffffff;
+    transition: all 200ms;
+    will-change: transform;
 }
+.over {
+    transform: scale(1.1, 1.1);
+}
+
 [draggable] {
     -moz-user-select: none;
     -khtml-user-select: none;
@@ -11,8 +17,8 @@
     -khtml-user-drag: element;
     -webkit-user-drag: element;
 }
-.draggable-div.over {
+/* .draggable-div.over {
     border: 2px dashed #000;
     border-top: 2px solid blue;
-  }
+  } */
   

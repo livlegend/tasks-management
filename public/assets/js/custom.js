@@ -2,9 +2,9 @@
     "use strict";
 
     // metisMenu 
-$("#sidebar_menu").metisMenu();
+// $("#sidebar_menu").metisMenu();
 // metisMenu 
-$("#admin_profile_active").metisMenu();
+// $("#admin_profile_active").metisMenu();
 
 $(window).on('scroll', function () {
 	var scroll = $(window).scrollTop();

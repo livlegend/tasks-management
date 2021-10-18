@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::resource('tasks',TaskController::class)->except(['show']);
+Route::resource('projects',ProjectController::class)->except(['show','edit','update','destroy']);
 
 Route::get('/', function () {
-    return view('web.pages.tasks');
+    return redirect('tasks');
 });
