@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::resource('tasks',TaskController::class)->except(['show']);
+Route::post('tasks/drags-update',[TaskController::class, 'updateDrags']);
 Route::resource('projects',ProjectController::class)->except(['show','edit','update','destroy']);
 
 Route::get('/', function () {

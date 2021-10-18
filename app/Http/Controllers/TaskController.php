@@ -79,12 +79,20 @@ class TaskController extends Controller
             ->with('tasks',Task::with('project')->get())
             : Redirect::back()->withErrors(['msg'=>'An error ocurs while updating']);
     }
-    
+    /**
+    * Update the drag and drop performed.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function updateDrags(Request $request){
+        return (new CrudService())->updateSwap($request->all());
+    }
     /**
     * Remove the specified resource from storage.
     *
     * @param  \App\Models\Task  $task
-    * @return \Illuminate\Http\Response
+    * @return boolean
     */
     public function destroy(Task $task)
     {

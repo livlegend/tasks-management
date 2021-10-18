@@ -1,4 +1,6 @@
 let remove = document.querySelector('.draggable-div');
+let dragged=0;
+let dropped=0;
 
 let dragSrcEl = null;
 
@@ -7,7 +9,6 @@ function dragStart(e) {
   dragSrcEl = this;
   e.dataTransfer.effectAllowed = 'move';
   e.dataTransfer.setData('text/html', this.innerHTML);
-  console.log('start',e.target)
 };
 
 function dragEnter(e) {
@@ -27,13 +28,15 @@ function dragOver(e) {
 
 function dragDrop(e) {
   if (dragSrcEl != this) {
-    dragSrcEl.innerHTML = this.innerHTML;
-    this.innerHTML = e.dataTransfer.getData('text/html');
-    dropped_id=dragSrcEl
-    //dropped_id = $(dragSrcEl).find('input [name=replaced_id]').val()
+      dragSrcEl.innerHTML = this.innerHTML;
+      dropped=$(this.innerHTML).children('input[name=replaced_id]').val();
+      dragged=$(e.dataTransfer.getData('text/html')).children('input[name=replaced_id]').val();
+      this.innerHTML = e.dataTransfer.getData('text/html');
+      updateDrags(dragged,dropped);
   }
   return false;
 }
+
 
 function dragEnd(e) {
   let listItens = document.querySelectorAll('.draggable');
@@ -43,6 +46,7 @@ function dragEnd(e) {
   this.style.opacity = '1';
 }
 
+// ALL EVENTS ON DRAGGED OBJECTS
 function addEventsDragAndDrop(el) {
   el.addEventListener('dragstart', dragStart, false);
   el.addEventListener('dragenter', dragEnter, false);

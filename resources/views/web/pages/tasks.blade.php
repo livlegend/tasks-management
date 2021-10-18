@@ -43,7 +43,7 @@
             @foreach ($tasks as $task)
             <div class="col-lg-12 my-2">
                 <div class="card_box box_shadow draggable-div" draggable="true" id='box_{{ $task->id }}'>
-                    <span class="badge badge-primary">PRIORITY : {{ $task->priority }}</span>
+                    {{-- <span class="badge badge-primary">PRIORITY : {{ $task->priority }}</span> --}}
                     <div class="box_body">
                         <p class="f-w-400" style="font-size: larger;"> {{ $task->name }}; at  {{ date('d-m-Y H:i',strtotime($task->task_time)) }}</p>
                         <span class="badge badge-secondary">PROJECT : {{ ($task->project) ? $task->project->name :' - ' }}</span>
@@ -55,7 +55,7 @@
                         <button class="btn btn-danger btn-sm" onclick="deleteTask({{ $task->id }})">
                             Delete
                         </button>
-                        <input type="text" style="display:none" name="replaced_id" value="{{ $task->id }}">
+                        <input type="text" style="display: none;" name="replaced_id" value="{{ $task->id }}">
                     </div>
                 </div>
             </div>
@@ -93,10 +93,21 @@
             });
         }
     }
-    function saveChanges(){
-    //    console.log('dragged', dragged_id)
-    //    console.log('dropped', dropped_id)
-    }
 
+    function updateDrags(dragged_id,dropped_id){
+        $.ajax({
+                type:'POST',
+                url:' {{ url("tasks/drags-update") }}',  
+                data: {"_token": "{{ csrf_token() }}","dragged_id":dragged_id, "dropped_id":dropped_id},
+                success:function(data) {
+                    console.log('updated')
+                },
+                error: function(data) {
+                    console.log('error',data)
+                    alert('error ! Update not done')
+                }
+            });
+        }
+    
 </script>
 @endsection
